@@ -44,13 +44,30 @@ public class PaintDemo {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
 
-            g.setColor(Color.BLACK);
-            g.drawRect(50, 50, 100, 50);
-            g.drawOval(200, 300, 50, 50);
+//            g.setColor(Color.BLACK);
+//            g.drawRect(50, 50, 100, 50);
+//            g.drawOval(200, 300, 50, 50);
+//
+//            g.setColor(Color.RED);
+//            g.fillRect(50, 300, 50, 50);
+//            g.fillOval(200, 50, 50, 100);
 
-            g.setColor(Color.RED);
-            g.fillRect(50, 300, 50, 50);
-            g.fillOval(200, 50, 50, 100);
+            g.setColor(Color.CYAN);
+            g.fillRect(0,0,500,500);
+
+            g.setColor(Color.GREEN);
+            g.fillRect(0,400, 500, 500);
+            //g.fillArc(200, 400, 200, 150, 30,15);
+
+            g.setColor((Color.YELLOW));
+            g.fillOval(50, 50, 150, 150);
+
+            g.setColor(Color.WHITE);
+            g.fillOval(300, 50, 105,110);
+            g.fillOval(400, 50, 100,110);
+            g.fillOval(350, 50, 95,100);
+
+
         }
     }
 }

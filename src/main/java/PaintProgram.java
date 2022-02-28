@@ -5,8 +5,8 @@ import java.awt.event.*;
 public class PaintProgram implements ActionListener {
     JFrame frame;
     DrawingPanel dPanel;
-    JPanel buttonPanel;
-    JButton pencilButton, eraserButton;
+    JPanel buttonPanel, colorPanel;
+    JButton pencilButton, eraserButton, blackButton, blueButton, greenButton, yellowButton;
 
     // This is the PaintProgram constructor which sets up the JFrame
     // and all other components and containers
@@ -32,6 +32,27 @@ public class PaintProgram implements ActionListener {
         eraserButton.addActionListener(this);
         buttonPanel.add(eraserButton);
 
+
+        colorPanel = new JPanel();
+        colorPanel.setLayout(new BoxLayout(colorPanel, BoxLayout.Y_AXIS));
+        frame.add(colorPanel, BorderLayout.EAST);
+
+        blackButton = new JButton("Black");
+        blackButton.addActionListener(this);
+        colorPanel.add(blackButton);
+
+        blueButton = new JButton("Blue");
+        blueButton.addActionListener(this);
+        colorPanel.add(blueButton);
+
+        greenButton = new JButton("Green");
+        greenButton.addActionListener(this);
+        colorPanel.add(greenButton);
+
+        yellowButton = new JButton("Yellow");
+        yellowButton.addActionListener(this);
+        colorPanel.add(yellowButton);
+
         // Set the size and set the visibility
         frame.pack();
         frame.setVisible(true);
@@ -45,6 +66,24 @@ public class PaintProgram implements ActionListener {
         if (ae.getActionCommand().equals("Pencil")) {
             dPanel.setMode("Pencil");
         }
+        if (ae.getActionCommand().equals("Black")){
+            dPanel.setColor(Color.BLACK);
+        }
+        if (ae.getActionCommand().equals("Green")){
+            dPanel.setColor(Color.GREEN);
+        }
+        if (ae.getActionCommand().equals("Blue")){
+            dPanel.setColor(Color.BLUE);
+        }
+        if (ae.getActionCommand().equals("Yellow")){
+            dPanel.setColor(Color.YELLOW);
+        }
+
+        if (ae.getActionCommand().equals("Eraser")){
+            dPanel.setMode("Eraser");
+        }
+
+
     }
 
     // Main method just creates a PaintProgram object
@@ -127,6 +166,7 @@ public class PaintProgram implements ActionListener {
             for (int x = 0; x < WIDTH; x++) {
                 for (int y = 0; y < HEIGHT; y++) {
                     if (isPainted[x][y]) {
+                        g.setColor(colors[x][y]);
                         g.drawRect(x, y, 1, 1);
                     }
                 }
@@ -147,6 +187,17 @@ public class PaintProgram implements ActionListener {
                     e.getY() >= 0 && e.getY() < HEIGHT) {
                     // Set current pixel as painted
                     isPainted[e.getX()][e.getY()] = true;
+                    colors[e.getX()][e.getY()] = color;
+                }
+            }
+            if (mode.equals("Eraser")) {
+                if (e.getX() >= 0 && e.getX() < WIDTH && e.getY() >= 0 && e.getY() < HEIGHT) {
+                    for (int row = e.getX() - 5; row < e.getX() + 5; row++){
+                        for (int col = e.getY() - 5; col <e.getY() + 5; col++){
+                            isPainted[row][col] = false;
+                        }
+                    }
+
                 }
             }
 
